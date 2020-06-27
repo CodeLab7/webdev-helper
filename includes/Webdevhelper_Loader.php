@@ -1,26 +1,5 @@
 <?php
 
-/**
- * Register all actions and filters for the plugin
- *
- * @link       https://codelab7.com
- * @since      1.0.0
- *
- * @package    Webdevhelper
- * @subpackage Webdevhelper/includes
- */
-
-/**
- * Register all actions and filters for the plugin.
- *
- * Maintain a list of all hooks that are registered throughout
- * the plugin, and register them with the WordPress API. Call the
- * run function to execute the list of actions and filters.
- *
- * @package    Webdevhelper
- * @subpackage Webdevhelper/includes
- * @author     Codelab7 <info@codelab7.com>
- */
 class Webdevhelper_Loader
 {
 
