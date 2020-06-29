@@ -26,7 +26,7 @@ class Webdevhelper {
 
 	private function create_master_settings() {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/Webdevhelper_Settings.php';
-		$setting_page = new Webdevhelper_Settings( 'DevHelp df' );
+		$setting_page = new Webdevhelper_Settings( 'developer API' );
 		$this->loader->add_action( 'admin_init', $setting_page, 'init_settings' );
 		$this->loader->add_action( 'admin_menu', $setting_page, 'add_setting_page' );
 
@@ -44,13 +44,15 @@ class Webdevhelper {
 	private function create_custom_post() {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/Webdevhelper_CustomPost.php';
 		$post = new Webdevhelper_CustomPost();
-
 		$post->set_post_type( 'post' );
-		$post->create_cate( 'Hello World' );
+		$post->create_cate( 'Hello World' ); //It will create a taxonomy for above post type
 		$post->create_tag( 'Hello Master' );
 
-		$this->loader->add_action( 'init', $post, 'register_taxonomy' );
+		$post->create_custom_post( 'custom post' ,[]); //You can add configure into this
+		$post->create_cate( 'Hello World' ); //It will create a taxonomy for above post type
 
+		$post->create_custom_page( 'custom page' );
+		$this->loader->add_action( 'init', $post, 'register' );
 	}
 
 	private function load_dependencies() {
