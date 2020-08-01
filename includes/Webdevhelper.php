@@ -9,7 +9,7 @@ class Webdevhelper {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		//$this->create_master_settings();
-		//$this->create_custom_post();
+		$this->create_custom_post();
 	}
 
 	private function define_public_hooks() {
@@ -27,9 +27,6 @@ class Webdevhelper {
 	private function create_master_settings() {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/Webdevhelper_Settings.php';
 		$setting_page = new Webdevhelper_Settings( 'developer API' );
-		$this->loader->add_action( 'admin_init', $setting_page, 'init_settings' );
-		$this->loader->add_action( 'admin_menu', $setting_page, 'add_setting_page' );
-
 		/**
 		 * How to use Settings Page:
 		 * Use following to create option fields.
@@ -39,6 +36,9 @@ class Webdevhelper {
 		$setting_page->add_option( 'Developer Address', 'textarea' );
 		$setting_page->add_option( 'Ultimate Access', 'password' );
 		$setting_page->add_option( 'Appreciate Developer', 'checkbox' );
+
+		$this->loader->add_action( 'admin_init', $setting_page, 'init_settings' );
+		$this->loader->add_action( 'admin_menu', $setting_page, 'add_setting_page' );
 	}
 
 	private function create_custom_post() {
@@ -48,7 +48,7 @@ class Webdevhelper {
 		$post->create_cate( 'Hello World' ); //It will create a taxonomy for above post type
 		$post->create_tag( 'Hello Master' );
 
-		$post->create_custom_post( 'custom post' ,[]); //You can add configure into this
+		$post->create_custom_post( 'custom post', [] ); //You can add configure into this
 		$post->create_cate( 'Hello World' ); //It will create a taxonomy for above post type
 
 		$post->create_custom_page( 'custom page' );

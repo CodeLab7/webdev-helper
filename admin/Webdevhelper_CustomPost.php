@@ -30,7 +30,6 @@ class Webdevhelper_CustomPost extends Webdevhelper_Abstruct {
 			'slug'   => sanitize_title( $name ),
 			'config' => $config
 		];
-
 		$this->post_type = sanitize_title( $name );
 	}
 
