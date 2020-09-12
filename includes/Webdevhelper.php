@@ -10,6 +10,7 @@ class Webdevhelper {
 		$this->define_public_hooks();
 		//$this->create_master_settings();
 		//$this->create_custom_post();
+		$this->support();
 	}
 
 	private function define_public_hooks() {
@@ -32,18 +33,29 @@ class Webdevhelper {
 		 * Use following to create option fields.
 		 * Available Options are: text, textarea, password, checkbox
 		 * */
-		$setting_page->add_section('General');
+		$setting_page->add_section( 'General' );
 		$setting_page->add_option( 'Developer Name', 'text' );
 		$setting_page->add_option( 'Developer Address', 'textarea' );
-		$setting_page->add_section('Security');
+		$setting_page->add_section( 'Security' );
 		$setting_page->add_option( 'Ultimate Access', 'password' );
 		$setting_page->add_option( 'Appreciate Developer', 'checkbox' );
 
 		/**
 		 * Below are setting to set menu and options
 		 */
-		$this->loader->add_action( 'admin_init', $setting_page, 'init_settings');
-		$this->loader->add_action( 'admin_menu', $setting_page, 'add_setting_page');
+		$this->loader->add_action( 'admin_init', $setting_page, 'init_settings' );
+		$this->loader->add_action( 'admin_menu', $setting_page, 'add_setting_page' );
+	}
+
+	private function support() {
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'support/CL7_Support.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'support/CL7_Settings.php';
+		$support_settings = new CL7_Settings();
+		$this->loader->add_action( 'admin_init', $support_settings, 'init_settings' );
+		$this->loader->add_action( 'admin_menu', $support_settings, 'add_setting_page' );
+		$cl7 = new CL7_Support();
+		$this->loader->add_action( 'admin_footer', $cl7, 'feedback_widget_admin' );
+		$this->loader->add_action( 'wp_footer', $cl7, 'feedback_widget' );
 	}
 
 	private function create_custom_post() {
